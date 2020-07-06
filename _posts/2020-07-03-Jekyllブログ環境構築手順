@@ -1,0 +1,120 @@
+---
+layout: article
+title: Page - Aside
+aside:
+  toc: true
+---
+
+
+# はじめに
+Jekyll newする方法を紹介している記事が多いのですが、
+個人的にはテーマをダウンロード&pushして使うのがてっとり速いと思ったのです。
+(Rubyに不慣れでバージョン合わせるなどにいまいち自信がなかったので。。)
+
+その方法はあまり紹介されてない（するまでもない？）ので記事にしてみました。
+
+
+# こういうサイトを作ろう！
+[デモページ](https://tianqi.name/jekyll-TeXt-theme/docs/en/quick-start)
+＊私が作ったテンプレートではありません！
+多機能＆シンプル＆公式テーマなのでこれを使ってみます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/06c728cc-548b-9857-37a5-fa95750404c9.png)
+
+# Themeをダウンロード
+
+以下のボタンを押してソースをダウンロード
+Installing the Theme
+2.Download and unzip the file to your Jekyll site directory.
+
+https://tianqi.name/jekyll-TeXt-theme/docs/en/quick-start#installing-the-theme
+
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/b5e16d99-1b62-2c15-b00c-171ac43f1a65.png)
+
+ダウンロードしたら解凍し、ディレクトリを好きな場所に移動して好きな名前を付ける。
+後に以下のようなURLになるので、そのつもりで決めましょう！
+`https://githubusername.github.io/[**ここで付けたディレクトリの名前**]/`
+
+* 以降、このディレクトリは「ルートディレクトリ」と呼びます。
+* サンプルでは「mypage」と付けています。
+
+# GitHubに公開
+
+- GitHubアカウントを作成する
+    - https://github.com
+- GitHubリポジトリを作成
+    - https://github.com/new
+    - Reposigory nameにさっき設定したルートディレクトリの名前を入力する
+    - Publicにチェックが入っていることを確認する
+    - Create repositoryボタンをクリックする
+
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/3e2be47d-68d4-2235-1642-adba34de52bf.png)
+
+- リポジトリURLをコピー
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/341008a2-cb9c-587c-9083-41d03b404f8a.png)
+
+次はターミナルで作業します。
+
+- ルートディレクトリに移動
+
+```
+cd ~/mypage
+```
+
+- ルートディレクトリをgit管理下に設定
+
+```
+git init
+```
+
+- ステージング(ちょっと待つかも)
+
+```
+git add .
+```
+
+- コミット
+
+```
+git commit -m "初コミット"
+```
+
+- リモートリポジトリURLを登録 (*ここでさっきコピーしたURLを使います！)
+
+```
+git remote add origin コピーしたURL（https://github.com/hinahinako/mypage）
+```
+
+- プッシュ
+
+```
+git push origin master
+```
+
+次はまたブラウザからGitHubを操作します。
+
+- Settingタブに移動
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/d18ec680-b878-475e-6d6a-53a8838035f1.png)
+
+「GitHub Pages」にあるSourseをマスターブランチにする
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/2bcad345-8a9a-5955-a972-1abaed53c9cd.png)
+
+これで設定は終わりです。
+さきほどの「GitHub Pages」の水色のところにURLが書いてあるのでクリックしてサイトを確認しましょう！
+
+Your site is ready to be published at https://hinahinako.github.io/mypage/.
+
+＊初回なので少し時間がかかると思います。404エラーになったら２分くらい時間をおいてからアクセスしてみてください。
+
+サイトが表示されれば構築完了です！
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/284077/feab9df9-8538-5431-5f7f-4b603bc58938.png)
+
+
+
+# ローカル環境構築編
+docker-composeを作成するあたりでエラーになりました。。
+
+```Could not find 'bundler' (2.1.4) required by your /Users/<ユーザー名>/<ルートディレクトリ名>/Gemfile.lock. (Gem::GemNotFoundException)
+```
+以下の記事の手順に従ったら解決しました！
+https://qiita.com/kodai_0122/items/c4c13e89dd5c4cba1f32
+
