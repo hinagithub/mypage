@@ -1,7 +1,7 @@
 ---
 layout: article
 title: Nuxt+vuex+axios+vuetifyで記事の一覧をフィルターする仕組み
-tags: 基本情報技術者試験
+tags: Nuxt.js
 aside:
   toc: true
 ---
@@ -9,7 +9,7 @@ aside:
 
 # この記事について
 axiosで外部データを取得し、vuexで管理する方法を知りました。
-やり方を忘れてしまった時に参考にできるよう、内容をこの記事にまとめておきます。
+その方法を忘れてしまった未来の自分のために、内容をこの記事にまとめておきます。
 
 環境:
 - Nuxt.js (@nuxt/cli v2.14.1)
@@ -20,9 +20,9 @@ axiosで外部データを取得し、vuexで管理する方法を知りまし�
 # やること
 ![image](https://user-images.githubusercontent.com/44778704/89621529-74a32b80-d8cc-11ea-8bef-c8f155c31c64.png)
 
-- axiosで外部APIから記事一覧を取得
-- その記事一覧をstoreで管理して、pageで扱う
-- 特定のuserIdでフィルターする
+- axiosで外部APIから記事一覧を取得する
+- その記事一覧をstore側で管理して、page側で表示する
+- 特定のuserIdでフィルターできるようにする
 
 # 1.プロジェクト作成
 
@@ -196,7 +196,6 @@ export const state = () => ({
 ## mutations
 
 ```js
-
 export const mutations = {
   setList(state, list) {
     state.list = list;
@@ -208,7 +207,6 @@ export const mutations = {
     state.length = length;
   }
 };
-
 ```
 
 以下の処理を定義しています。
@@ -418,5 +416,6 @@ stateの変数をこちら側で使うために定義しています。
 
 # まとめ
 
-
-
+methods→actions→mutationsの順に処理を実行してstateの値をいじるというのがvuexの基本です。多分。
+別プロジェクトではおんなじ要領でページネーションも盛り込んでました。
+なので、この記事がわかれば、基本的な操作はだいたいできるんじゃないかな、と思います。
