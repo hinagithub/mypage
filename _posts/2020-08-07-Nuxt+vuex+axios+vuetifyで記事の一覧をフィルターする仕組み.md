@@ -7,22 +7,45 @@ aside:
 ---
 
 
-# この記事について
+# はじめに
+
+##この記事について
 axiosで外部データを取得し、vuexで管理する方法を知りました。
 その方法を忘れてしまった未来の自分のために、内容をこの記事にまとめておきます。
 
 環境:
-- Nuxt.js (@nuxt/cli v2.14.1)
-- vuex
-- axios
-- Vuetify
+- Nuxt.js (2.14.1)
+- vuex (^5.12.0)
+- axios (^1.11.2)
+- Vuetify (^2)
 
-# やること
+
+## やること
 ![image](https://user-images.githubusercontent.com/44778704/89621529-74a32b80-d8cc-11ea-8bef-c8f155c31c64.png)
 
 - axiosで外部APIから記事一覧を取得する
-- その記事一覧をstore側で管理して、page側で表示する
-- 特定のuserIdでフィルターできるようにする
+- 記事一覧はstore側で管理し、page側で表示する
+- userIdで記事をフィルターできるようにする
+
+
+## 外部から取得するデータ
+
+以下のデータを使います。
+[JSONPlaceholder](https://jsonplaceholder.typicode.com/posts)
+
+中身は以下のような形式になっています。
+
+```json
+[
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "title text",
+    "body": "body text"
+  }
+]
+```
+
 
 # 1.プロジェクト作成
 
@@ -53,10 +76,12 @@ yarn add @nuxtjs/vuetify
 ```
 
 #### 補足
+
+以下の警告が出ていました。
+```WARN devModules has been renamed to buildModules and will be removed in Nuxt 3. 15:11:12```
+
 devModulesはNuxt3以降で消える予定らしいです。
 今回は気にせず続行します！
-
-```WARN devModules has been renamed to buildModules and will be removed in Nuxt 3. 15:11:12```
 
 # 結論
 
@@ -180,6 +205,8 @@ export default {
 
 ## state
 
+StateはコンポーネントでいうところのDataみたいなものです。
+
 ```js
 export const state = () => ({
   list: [],
@@ -188,12 +215,16 @@ export const state = () => ({
 });
 ```
 
-以下の変数を定義しています。
-- `list`・・・APIから取得した記事をそのまま格納する変数
-- `viewList`・・・フィルターした後のlistを入れておく変数
-- `length`・・・viewListの記事数を格納しておく変数
+ここでは3つの変数を定義しています。
 
-## mutations
+- `list`・・・APIから取得した記事をそのまま格納する変数
+- `viewList`・・・フィルターした後のlistを入れる変数
+- `length`・・・viewListの記事数を入れる変数
+
+## Mutations
+
+Mutationsは、コンポーネントでいうとMethodsのようなものです。
+Stateの状態を更新する際はこのMutationを使います。
 
 ```js
 export const mutations = {
@@ -209,23 +240,26 @@ export const mutations = {
 };
 ```
 
-以下の処理を定義しています。
+参考:
+- [Vuexのミューテーションの使い方。状態を更新しよう｜Vuex](https://dev83.com/vue-vuex04/)
+
+今回はActionsで処理した結果を受け取り、Stateに再代入するだけの関数をそれぞれ用意しています。
+いわゆるsetterです。
+
 - `setList`
 - `setViewList`
 - `setLength`
 
+## Actions
 
-mutationsは、コンポーネントでいうとmethodsのようなものです。
-stateの状態を更新する際はこのmutationを使います。
+Actionsは非同期処理を書くことができます。
+今回はactionsで色々処理し、Mutationを通してStateを更新するという流れで書いています。
 
-今回はactionsで処理した結果を受け取り、stateに再代入するだけの関数をそれぞれ用意しています。
-いわゆるsetterです。
+(より良いActionsとMutationsの違いや使い分けについてはまだ勉強中です。。。)
 
-## actions
+### `getList()`
 
-### getList()
-
-getList()は外部から記事一覧を取得し、一覧をすべて表示するための関数です。
+`getList()`は外部から記事一覧を取得し、一覧をすべて表示するための関数です。
 
 ```js
 export const actions = {
@@ -236,21 +270,7 @@ export const actions = {
     );
 ```
 ここではasync/awaitを使って外部の記事を取得しています。
-actionsでは非同期処理を記述できるので、axiosで外部APIを叩くような処理はここに書きます。
-
-ちなみに取得したデータは以下のような形式です。
-
-```json
-[
-  {
-    "userId": 1,
-    "id": 1,
-    "title": "title text",
-    "body": "body text"
-  }
-]
-```
-[呼び出しているURL](https://jsonplaceholder.typicode.com/posts)にアクセスすれば全てのデータを閲覧できます。
+Actionsでは非同期処理を記述できるので、axiosで外部APIを叩くような処理はここに書きます。
 
 
 ```js
@@ -263,16 +283,16 @@ actionsでは非同期処理を記述できるので、axiosで外部APIを叩�
 コメントにある通りですが・・・
 この記事は100件もあってサンプルとして使いにくかったので、適当に34件に絞り込みました。
 
-
 ```js
     commit("setList", oddIdList);
     commit("setViewList", oddIdList);
     commit("setLength", oddIdList.length);
   },
 ```
-`commit`で処理結果を引数にmutationsを実行し、stateの状態を更新しています。
 
-### filterUser()
+`commit`で処理結果を引数にMutationsを実行し、Stateの状態を更新しています。
+
+### `filterUser()`
 filterUser()はユーザIDに該当する記事だけを表示するための関数です。
 
 ```js
@@ -293,9 +313,26 @@ listに格納されているデータの中から、userIdが引数と一致す�
 
 `commit`で処理結果を引数にmutationsを実行し、stateの状態を更新しています。
 
+
+### メモ dispatchについて
+
+ActionsからActionsを呼びたい時は`dispatch`を使います。
+例えば`getList`から`filterUser()`を呼ぶ場合は以下のように書きます。
+
+```js
+async getList({ commit,dispatch }, categories) {
+    const list = await this.$axios.$get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    commit("setViewList", viewList);
+    commit("setLength", viewList.length);
+    dispatch("filterUser", 1)
+})
+```
+
 # `pages/posts.vue`
 
-## template
+## `<template>`
 
 ### ボタン
 
@@ -340,13 +377,15 @@ listに格納されているデータの中から、userIdが引数と一致す�
 ここではVuetifyの`v-lis`を使って記事一覧を表示しています。
 `v-for="(article, i) in viewList" :key="i"`のところでviewList内の記事を順次取り出し、マスタッシュ `{{}}`を使って記事の内容を表示しています。
 
-## script
+## `<script>`
 
 ```js
 import { mapActions, mapState } from "vuex";
 ```
 mapActionsとmapStateをインポートして使用できるようにしています。
 これらはヘルパーというらしいです。
+
+ヘルパーの種類:
 
 - 1.状態を呼び出す
   - mapState
@@ -356,11 +395,11 @@ mapActionsとmapStateをインポートして使用できるようにしてい�
   - mapMutations
   - mapActions
 
-以下の記事で詳しく解説してくださってます。
+参考:
 [【Vuex】mapState, mapGetters, mapMutations, mapActionsの最低限の使い方まとめ](https://qiita.com/terufumi1122/items/6f9470c8d416a4af7502)
 
 
-### methods
+### Methods
 
 ```js
 methods: {
@@ -372,10 +411,10 @@ methods: {
 ```
 mapActionsを使ってstoreのactionsをmethodsから呼び出せるように定義しています。
 
-- getList・・・actionsの`getList()`を呼ぶ
-- filterUser・・・actionsの`filterUser()`を呼ぶ
+- `getList`・・・actionsの`getList()`を呼ぶ
+- `filterUser`・・・actionsの`filterUser()`を呼ぶ
 
-### mounted
+### Mounted
 
 ```js
 mounted: function () {
@@ -386,7 +425,7 @@ mounted: function () {
 初期表示の際は全ての記事を表示するため、getListを実行しています。
 
 
-####補足:
+#### 補足:
 
 別のプロジェクトでこれを実行した際、記事が表示されない事象があった。
 その際はasync/awaitで呼び出したら記事が表示された。
@@ -399,7 +438,7 @@ mounted: async function () {
 原因不明・・
 まあこういう書き方もできるのか、くらいに覚えておこうと思いました。
 
-### computed
+### Computed
 
 ```js
 computed: {
@@ -410,12 +449,16 @@ computed: {
   },
 ```
 
-stateの変数をこちら側で使うために定義しています。
-変数名はstateと同じでなくてもOKみたいです。
-
+Stateの変数をこちら側で使うために定義しています。
+変数名はStateと同じでなくてもOKみたいです。
 
 # まとめ
 
-methods→actions→mutationsの順に処理を実行してstateの値をいじるというのがvuexの基本です。多分。
+Methods→Actions→Mutationsの順に処理を実行してStateの値をいじるというのがVuexの基本です。多分。
 別プロジェクトではおんなじ要領でページネーションも盛り込んでました。
 なので、この記事がわかれば、基本的な操作はだいたいできるんじゃないかな、と思います。
+
+
+
+# 参考
+[ともすたチャンネル -Nuxt.js入門 #06：Vuexのストアでデータを保管しよう-](https://www.youtube.com/watch?v=h7HIVssdWTQ&list=PLh6V6_7fbbo8koq2fzoz8lN4gqtPC3Yg4&index=6&t=3s)※Youtube
