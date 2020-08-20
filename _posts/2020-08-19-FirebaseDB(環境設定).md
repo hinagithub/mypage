@@ -104,19 +104,20 @@ npm run serve
 ※変数名は`VUE_APP_`から始まる必要がある
 
 ```
-VUE_APP_FOO=test
 VUE_APP_apiKey=🤫
 VUE_APP_authDomain=🤫
 VUE_APP_databaseURL=https://aaaaa.com
 VUE_APP_projectId=プロジェクト名
-VUE_APP_storageBucket=
-VUE_APP_messagingSenderId=
-VUE_APP_appId=
-VUE_APP_measurementId=
+VUE_APP_storageBucket=🤫
+VUE_APP_messagingSenderId=🤫
+VUE_APP_appId=🤫
+VUE_APP_measurementId=🤫
 
 ```
 
-`.gitigone`に`.env`を追加する
+上記のキーはfirebaseのプロジェクトページからコピペ可能。
+
+`.gitigore`に`.env`を追加する
 
 ```
 // .gitignore
