@@ -51,9 +51,7 @@ Vue CLIでプロジェクトを立ち上げる
 ```
 vue create vue_slack_clone
 ```
-
-![image](https://user-images.githubusercontent.com/44778704/90626974-7b2f8c80-e256-11ea-9854-97e7c43fa4b9.png)
-
+![image](https://user-images.githubusercontent.com/44778704/90794465-cbd2e280-e347-11ea-8877-b8de5d08c5e9.png)
 
 babelでエラーが出たら以下を実行。
 
