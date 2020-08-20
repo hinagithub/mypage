@@ -20,7 +20,7 @@ getRef() {
       console.log(storageRef.fullPath)
       // images/1538204593.png
       console.log(storageRef.name)
-      // Home.vue?76f2:348 1538204593.png
+      // Home.vue?🤫 1538204593.png
       console.log(storageRef.bucket)
       // Home.vue?🤫 pj004-vue-slack-clone.appspot.com
     },
@@ -40,9 +40,9 @@ snapshotには以下のプロパティがあるのでそれらをもとにゴニ
 
 - bytesTransferred: 作成された時点のバイト数
 - totalBytes: アップロードされる予定のバイト数
-- state: アップロードの現在の状態
+- state: アップロードの現在の状態(pauseなのかrunningなのか)
 
-などなど
+などなど。。
 
 ```js
 
