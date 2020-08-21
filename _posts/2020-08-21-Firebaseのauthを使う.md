@@ -6,10 +6,6 @@ aside:
   toc: true
 ---
 
-# vue-cli
-
-
-
 # はじめに
 
 ##この記事について
@@ -24,9 +20,7 @@ FirebaseのAuthoricationの使い方を知りました。
 - @vue/cli 4.5.4
 - Vue.js 3.x
 
-
 ※Firebaseのアカウントが必要です。
-
 
 # Vueを準備
 
@@ -36,6 +30,7 @@ Vue CLIでプロジェクトを作成
 vue create プロジェクト名
 ```
 
+設定項目
 ![image](https://user-images.githubusercontent.com/44778704/90856496-02971000-e3bd-11ea-8b0f-93184687d7d4.png)
 
 
@@ -51,7 +46,7 @@ found 1 high severity vulnerability
   run `npm audit fix` to fix them, or `npm audit` for details
 himac:auth hinako$ npm audit
 ```
-
+auditすると・・・
 ```
 npm audit fix
 ```
@@ -67,7 +62,7 @@ npm ERR!     Missing: core-js@^3.6.5
 npm install --save core-js
 ```
 
-今度はserialize-javascriptでエラー
+今度はserialize-javascriptで脆弱性レポートが出る
 ```
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
 │ High          │ Remote Code Execution                                        │
@@ -85,12 +80,12 @@ npm install --save core-js
 └───────────────┴──────────────────────────────────────────────────────────────┘
 ```
 
-npm audit fixしてもダメなので手動で解決する方法を模索しISSUEを発見。
+npm audit fixしてもダメ。
+ISSUEによると、この問題はまだ解決されていないらしい。</br>
 
 [High vulnerability in dependencies -> copy webpack plugin -> serialize js #5782](https://github.com/vuejs/vue-cli/issues/5782)
 
-この問題はまだ解決されていないらしい。。</br>
-いったん`npm-force-resolutions`でバージョン強制固定することに。
+いったん`npm-force-resolutions`でバージョン強制固定することに。</br>
 
 package.jsonにresolutionsを追加
 
@@ -110,20 +105,22 @@ package.jsonにresolutionsを追加
 yarn install
 
 ```
-6.0が無いから選べと言われる。
+6.0が無いから選べと言われるので4.0(最新)を選択
 ![image](https://user-images.githubusercontent.com/44778704/90860608-442bb900-e3c5-11ea-883d-5bddaf1b1ad7.png)
 
 強制固定を実行
 
 ```
 npx npm-force-resolutions
+
+→npx: 5個のパッケージを3.737秒でインストールしました。
 ```
 
 確認
 ```
 npm audit
 ```
-→ `found 0 vulnerabilities`になった！
+→ `found 0 vulnerabilities`になったらOK
 
 
 # Firebaseの設定
