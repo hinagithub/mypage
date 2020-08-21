@@ -62,6 +62,9 @@ npm ERR!     Missing: core-js@^3.6.5
 npm install --save core-js
 ```
 
+参考:
+[Vue.js×firebaseでアプリを作ってるときにfirebaseを入れたらエラーが起きた](https://qiita.com/Yui_active/items/6b21559c2940db04b0a6)
+
 今度はserialize-javascriptで脆弱性レポートが出る
 ```
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
@@ -122,33 +125,54 @@ npm audit
 ```
 → `found 0 vulnerabilities`になったらOK
 
+参考:
+[既存のnpmパッケージの依存関係を強制的に固定したいときはnpm-force-resolutionsが使える](https://scrapbox.io/nwtgck/%E6%97%A2%E5%AD%98%E3%81%AEnpm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AE%E4%BE%9D%E5%AD%98%E9%96%A2%E4%BF%82%E3%82%92%E5%BC%B7%E5%88%B6%E7%9A%84%E3%81%AB%E5%9B%BA%E5%AE%9A%E3%81%97%E3%81%9F%E3%81%84%E3%81%A8%E3%81%8D%E3%81%AFnpm-force-resolutions%E3%81%8C%E4%BD%BF%E3%81%88%E3%82%8B)
+
+
 # Firebaseの設定
 
-- FirebaseのWebsiteからプロジェクトを作成し、RealtimeDatabaseの使用を開始する。
-- ルールを `true` に設定する。
+FirebaseのWebsiteからプロジェクトを作成し、RealtimeDatabaseの使用を開始する。
+ルールを `true` に設定する。
 ![image](https://user-images.githubusercontent.com/44778704/90857764-c74a1080-e3bf-11ea-90e7-fe4e8560e244.png)
 
-- 歯車アイコン→プロジェクトを設定→全般→マイアプリ→`Firebase SDK snippet`に書かれているfirebaseConfigをコピー
+歯車アイコン→プロジェクトを設定→全般→マイアプリ→`Firebase SDK snippet`に書かれているfirebaseConfigをコピー
 ![image](https://user-images.githubusercontent.com/44778704/90857567-5d316b80-e3bf-11ea-8c43-9efac1faee0c.png)
 
+main.jsに貼り付け、`import firebase from 'firebase/app'`を上部に記載します。
 
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import firebase from 'firebase/app';
+
+var firebaseConfig = {
+  apiKey: 🤫,
+  authDomain: 🤫,
+  databaseURL: 🤫,
+  projectId: 'auth-503',
+  storageBucket: 'auth-503.appspot.com',
+  messagingSenderId: 🤫,
+  appId: 🤫',
+  measurementId: 🤫',
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+createApp(App)
+  .use(store)
+  .use(router)
+  .mount('#app');
 
 ```
-npm uninstall firebase
-```
+
+Authenticationに追加されたことを確認
+![image](https://user-images.githubusercontent.com/44778704/90865447-53166980-e3cd-11ea-9ab3-14017c449cde.png)
 
 
 
-実行
 
-```
-npm run serve
-```
-# firebase
-
-## import
-
-x
 
 ## Firebase アカウント登録
 
