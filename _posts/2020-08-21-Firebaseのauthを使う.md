@@ -13,8 +13,10 @@ aside:
 # はじめに
 
 ##この記事について
-Firebaseの環境設定について書いておく
+FirebaseのAuthoricationの使い方を知りました。
+使い方を忘れてしまった未来の自分のために、設定手順などを記事にまとめておこうと思います。
 
+参考:
 [vue.jsとFirebaseでSlackクローン構築(Firebase理解編)](https://reffect.co.jp/vue/vue-js-firebase-slack-clone)
 [Firebase Realtime Database公式ドキュメント](https://firebase.google.com/docs/database?hl=ja)
 
@@ -23,8 +25,7 @@ Firebaseの環境設定について書いておく
 - Vue.js 3.x
 
 
-Firebaseのアカウントが必要です。
-
+※Firebaseのアカウントが必要です。
 
 
 # Vueを準備
