@@ -122,7 +122,6 @@ npm audit
 ```
 → `found 0 vulnerabilities`になったらOK
 
-
 # Firebaseの設定
 
 - FirebaseのWebsiteからプロジェクトを作成し、RealtimeDatabaseの使用を開始する。
@@ -183,7 +182,7 @@ npm install dotenv
 ```
 VUE_APP_apiKey=🤫
 VUE_APP_authDomain=🤫
-VUE_APP_databaseURL=https://aaaaa.com
+VUE_APP_databaseURL=https://プロジェクト名.com
 VUE_APP_projectId=プロジェクト名
 VUE_APP_storageBucket=🤫
 VUE_APP_messagingSenderId=🤫
