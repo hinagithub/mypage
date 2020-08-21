@@ -76,16 +76,22 @@ module.exports = {
 ```
 npm run serve
 ```
+# firebase
 
+## import
 
-# Firebase アカウント登録
+```
+npm uninstall firebase
+```
+
+## Firebase アカウント登録
 
 手順になかったところを主に記載します。
 
-## Realtime Databaseを選択
+### Realtime Databaseを選択
 ![image](https://user-images.githubusercontent.com/44778704/90627415-da8d9c80-e256-11ea-9bea-1002913a9e1d.png)
 
-## ルールタブで`read`と`write`の権限を`true`に設定
+### ルールタブで`read`と`write`の権限を`true`に設定
 
 ```JSON
   "rules": {
