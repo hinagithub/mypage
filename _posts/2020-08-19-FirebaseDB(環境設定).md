@@ -6,6 +6,9 @@ aside:
   toc: true
 ---
 
+# vue-cli
+
+
 
 # はじめに
 
@@ -16,7 +19,8 @@ Firebaseの環境設定について書いておく
 [Firebase Realtime Database公式ドキュメント](https://firebase.google.com/docs/database?hl=ja)
 
 環境:
-- @vue/cli 4.4.1
+- @vue/cli 4.5.4
+- Vue.js 3.x
 
 
 # Firebase Realtime Database とは
@@ -47,11 +51,13 @@ Realtime DBをさらに強化したものが[Cloud Firestore](https://firebase.g
 
 # Vueを準備
 
-Vue CLIでプロジェクトを立ち上げる
+Vue CLIでプロジェクトを作成
+
 ```
-vue create vue_slack_clone
+vue create プロジェクト名
 ```
-![image](https://user-images.githubusercontent.com/44778704/90794465-cbd2e280-e347-11ea-8877-b8de5d08c5e9.png)
+
+![image](https://user-images.githubusercontent.com/44778704/90856496-02971000-e3bd-11ea-8b0f-93184687d7d4.png)
 
 babelでエラーが出たら以下を実行。
 
@@ -102,7 +108,13 @@ npm uninstall firebase
 
 [データベース ルールを使ってみる](https://firebase.google.com/docs/database/security/quickstart?hl=ja)
 
-## .envファイルの作成
+## .envで環境変数の設定
+
+インストール
+```
+npm install dotenv
+```
+
 ルートディレクトリに`.env`ファイルを用意
 ここにFirebaseへの接続情報を書く
 ※変数名は`VUE_APP_`から始まる必要がある
