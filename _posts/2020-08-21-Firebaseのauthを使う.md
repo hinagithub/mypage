@@ -27,19 +27,19 @@ FirebaseのAuthoricationの使い方を知りました。
 アカウント登録の際によく使われるメールリンク機能を実装します。
 こんな感じです。
 
-1. メールアドレスとパスワードで仮登録
+1. メールアドレスとパスワードで仮登録<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90954992-8da70180-e4b4-11ea-93b0-49d813b49565.png)
 
-2. 仮登録完了メールのリンクをクリック
+2. 仮登録完了メールのリンクをクリック<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90954376-c5ab4600-e4ae-11ea-8b08-58be6d312bbb.png)
 
-3. 完了を確認し続行をクリック
+3. 完了を確認し続行をクリック<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90953993-46684300-e4ab-11ea-9473-3a2974fbfe10.png)
 
-4. サインインする
+4. サインインする<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90954401-ed9aa980-e4ae-11ea-9feb-cadf809644b1.png)
 
-5. Homeに遷移し、「ログイン中」と表示される(メールアドレスが認証される)
+5. Homeに遷移し、「ログイン中」と表示される(メールアドレスが認証される)<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90955547-4ec77a80-e4b9-11ea-9ba6-1de5f471979d.png)
 
 
