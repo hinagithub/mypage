@@ -45,7 +45,7 @@ Realtime DBをさらに強化したものが[Cloud Firestore](https://firebase.g
 
 # 開発環境構築
 
-以下をもとに進める
+以下を参考に設定します。
 [vue.jsとFirebaseでSlackクローン構築(Firebase理解編)](https://reffect.co.jp/vue/vue-js-firebase-slack-clone)
 
 

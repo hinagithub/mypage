@@ -43,7 +43,11 @@ FirebaseのAuthoricationの使い方を知りました。
 ![image](https://user-images.githubusercontent.com/44778704/90955547-4ec77a80-e4b9-11ea-9ba6-1de5f471979d.png)
 
 
-# Vueを準備
+# 設定
+
+環境を整えます。
+
+## Vueを準備
 
 Vue CLIでプロジェクトを作成
 
@@ -63,7 +67,7 @@ npm install firebase
 `found 1 high severity vulnerability`がでたらこちらを参照して下さい。
 [VueでFirebaseをインストールするときに出るhigh severity vulnerability](https://hinahinako.github.io/mypage/2020/08/21/Vue%E3%81%A7Firebase%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%81%99%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%87%BA%E3%82%8Bhigh-severity-vulnerability.html)
 
-# Firebaseの設定
+## Firebaseの設定
 
 こちらを参考にプロジェクトを作成します。
 [vue.jsのログイン認証をFirebase Authenticationを使って構築](https://reffect.co.jp/vue/vue-js-authentication-by-firebase)
@@ -97,7 +101,7 @@ createApp(App)
 
 ```
 
-# Bootstrapの設定
+## Bootstrapの設定
 
 インストール
 
@@ -115,12 +119,14 @@ import store from './store';
 import firebase from 'firebase/app';
 import 'bootstrap/dist/css/bootstrap.css';      // add
 import 'bootstrap-vue/dist/bootstrap-vue.css';  // add
+
+// ...略
+
 ```
 
+## ルーティング
 
-
-
-## router/index.js
+### router/index.js
 
 router/index.jsを修正し、`/register`と`/signin`へのルーティングを設定します。
 
@@ -157,7 +163,7 @@ export default router;
 
 ```
 
-## App.vue
+### App.vue
 
 App.vueもルーティングにあわせて修正します。
 
@@ -175,9 +181,11 @@ App.vueもルーティングにあわせて修正します。
 ```
 
 
-## views/Home.vue
+## ソースコードと解説
 
-ログイン後に遷移する画面です。
+それぞれの画面のソースコードと解説を記載します。
+
+### views/Home.vue
 
 ```js
 <template>
@@ -208,7 +216,6 @@ export default {
   },
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         this.authState = "ログイン";
         this.emailVerified = user.emailVerified ? "済" : "未";
@@ -221,18 +228,128 @@ export default {
 };
 </script>
 ```
+Home.vueはログイン後に遷移する画面です。
 
-- `.onAuthStateChanged()`: で現在ログインしているユーザの情報を取得することができます。
+#### data
+
+```js
+  data() {
+    return {
+      authState: "",
+      emailVerified: "",
+    };
+  },
+```
+画面に出力する値を定義しています。
+- authState: ログインしているかどうかのステータス
+- emailVerified: メール認証されているかどうかのステータス
+
+
+#### methods
+
+```js
+signOut() {
+      firebase.auth().signOut();
+    },
+```
+
+Firebaseの`signOut()`を呼び出してログアウト状態にする関数です。
+
+
+#### mounted
+
+```js
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      this.authState = "ログイン";
+      this.emailVerified = user.emailVerified ? "済" : "未";
+    } else {
+      this.authState = "ログアウト";
+      this.emailVerified = "-";
+    }
+  });
+```
+
+ユーザのログイン状態などを監視しています。
+- `.onAuthStateChanged()`: 現在ログインしているユーザの情報を取得することができます。
 - `user.emailVerified`プロパティ: メール認証をしているかどうかがわかります。
 
-
 補足:
-アカウント作成の際、仮登録完了メールを受け取っただけで、まだメール内に書かれているリンクをクリックしていない場合でもログインは可能です。 `user.emailVerified`は、メール認証のリンクをクリックし、その後初回ログインをしてはじめて`true`になるみたいです。
+アカウント作成の際、メールに書かれている**認証リンクをクリックしていない状態でもログインは可能**です。<br />`user.emailVerified`は、メール認証のリンクをクリックし、その後初回ログインをしてはじめて`true`になるみたいです。
 
 参考:
 [Vue.jsとFirebaseで認証メール機能(vuetifyおまけ付き)](https://note.com/tenlife/n/nb225fc1269c7)
 
+### views/Register.vue
 
+```js
+<template>
+  <div class="w-25 p-5">
+    <p class="h4 pb-3">アカウントの作成</p>
+    <form @submit.prevent="registerUser">
+      <!-- メールアドレス -->
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="メールアドレス" v-model="email" />
+      </div>
+      <!-- パスワード -->
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="パスワード" v-model="password" />
+      </div>
+      <!-- 登録ボタン -->
+      <button type="submit" class="btn btn-primary">登録</button>
+      <!-- エラーメッセージ -->
+      <div class="text-danger">{{ error }}</div>
+    </form>
+  </div>
+</template>
+
+<script>
+import firebase from "firebase/app";
+import "firebase/auth";
+
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      error: "",
+    };
+  },
+  methods: {
+    registerUser() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => this.sendEmail(this.email))
+        .catch((e) => (this.error = e.message));
+    },
+    sendEmail() {
+      const actionCodeSettings = {
+        url: "http://" + location.host + "/signin",
+      };
+      firebase.auth().languageCode = "ja";
+      const user = firebase.auth().currentUser;
+      user
+        .sendEmailVerification(actionCodeSettings)
+        .then(() => alert("認証メールを送りました!"))
+        .catch((e) => console.log(e));
+    },
+  },
+};
+</script>
+
+</script>
+
+```
+
+Register.vueはアカウント登録を行う画面です。
+
+- `.createUserWithEmailAndPassword(this.email, this.password)`: emailとpasswordを引数にFirebaseのAuthenticationにユーザを登録しています。その後、`sendEmail()`を呼び出します。
+
+- `sendEmail()`: 認証リンクメールを送信する関数です。
+  - `actionCodeSettings`: 認証リンクを押した後の挙動を定義しています。ここでは`/signin`に遷移させています。
+  - `firebase.auth().languageCode = "ja"`: メールの文面を日本語にしています
+  -
 
 メールテンプレートの編集
 (FirebaseのE-mail認証でアドレスが正しいことを確認する)[https://nipo.sndbox.jp/develop-blog/emailverified]
