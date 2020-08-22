@@ -43,11 +43,11 @@ FirebaseのAuthoricationの使い方を知りました。
 ![image](https://user-images.githubusercontent.com/44778704/90955547-4ec77a80-e4b9-11ea-9ba6-1de5f471979d.png)
 
 
-# 設定
+# プロジェクトの作成と設定
 
 環境を整えます。
 
-## Vueを準備
+## vueプロジェクトを作成
 
 Vue CLIでプロジェクトを作成
 
@@ -463,7 +463,7 @@ signOut() {
 Firebaseの`signOut()`を呼び出してログアウト状態にする関数です。
 
 
-### mounted
+### Mounted
 
 ```js
   firebase.auth().onAuthStateChanged((user) => {
