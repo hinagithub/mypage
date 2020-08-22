@@ -181,11 +181,11 @@ App.vueもルーティングにあわせて修正します。
 ```
 
 
-## ソースコードと解説
+# ソースコードと解説
 
 それぞれの画面のソースコードと解説を記載します。
 
-### views/Register.vue
+## views/Register.vue
 
 ```js
 <template>
@@ -249,7 +249,7 @@ export default {
 
 Register.vueはアカウント登録を行う画面です。
 
-#### Data
+### Data
 ```js
   data() {
     return {
@@ -265,7 +265,7 @@ Register.vueはアカウント登録を行う画面です。
 - password: 画面上で入力されるパスワード
 - error: Firebaseから取得したエラーメッセージ
 
-#### Methods
+### Methods
 
 ```js
  registerUser() {
@@ -309,7 +309,7 @@ Register.vueはアカウント登録を行う画面です。
 
 
 
-### views/Signin.vue
+## views/Signin.vue
 
 ```html
 <template>
@@ -358,7 +358,7 @@ export default {
 ```
 Signin.vueはログインを行う画面です。
 
-#### Data
+### Data
 
 ```js
 data() {
@@ -376,7 +376,7 @@ Register.vueのDataとまったく同じです。
 - password: 画面上で入力されるパスワード
 - error: Firebaseから取得したエラーメッセージ
 
-#### Methods
+### Methods
 
 ```js
 signIn() {
@@ -392,7 +392,7 @@ signIn() {
 成功したらHOME画面へ遷移します。
 
 
-### views/Home.vue
+## views/Home.vue
 
 ```js
 <template>
@@ -437,7 +437,7 @@ export default {
 ```
 Home.vueはログイン後に遷移する画面です。
 
-#### Data
+### Data
 
 ```js
   data() {
@@ -452,7 +452,7 @@ Home.vueはログイン後に遷移する画面です。
 - emailVerified: メール認証されているかどうかのステータス
 
 
-#### Methods
+### Methods
 
 ```js
 signOut() {
@@ -463,7 +463,7 @@ signOut() {
 Firebaseの`signOut()`を呼び出してログアウト状態にする関数です。
 
 
-#### mounted
+### mounted
 
 ```js
   firebase.auth().onAuthStateChanged((user) => {
