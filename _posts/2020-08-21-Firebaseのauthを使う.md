@@ -22,6 +22,27 @@ FirebaseのAuthoricationの使い方を知りました。
 
 ※Firebaseのアカウントが必要です。
 
+# やること
+
+アカウント登録の際によく使われるメールリンク機能を実装します。
+こんな感じです。
+
+1. メールアドレスとパスワードで仮登録
+![image](https://user-images.githubusercontent.com/44778704/90954992-8da70180-e4b4-11ea-93b0-49d813b49565.png)
+
+2. 仮登録完了メールのリンクをクリック
+![image](https://user-images.githubusercontent.com/44778704/90954376-c5ab4600-e4ae-11ea-8b08-58be6d312bbb.png)
+
+3. 完了を確認し続行をクリック
+![image](https://user-images.githubusercontent.com/44778704/90953993-46684300-e4ab-11ea-9473-3a2974fbfe10.png)
+
+4. サインインする
+![image](https://user-images.githubusercontent.com/44778704/90954401-ed9aa980-e4ae-11ea-9feb-cadf809644b1.png)
+
+5. Homeに遷移し、「ログイン中」と表示される(メールアドレスが認証される)
+![image](https://user-images.githubusercontent.com/44778704/90955547-4ec77a80-e4b9-11ea-9ba6-1de5f471979d.png)
+
+
 # Vueを準備
 
 Vue CLIでプロジェクトを作成
@@ -171,9 +192,6 @@ Authenticationに追加されたことを確認
 ![image](https://user-images.githubusercontent.com/44778704/90865447-53166980-e3cd-11ea-9ab3-14017c449cde.png)
 
 
-
-
-
 ## Firebase アカウント登録
 
 手順になかったところを主に記載します。
@@ -192,40 +210,34 @@ Authenticationに追加されたことを確認
 
 [データベース ルールを使ってみる](https://firebase.google.com/docs/database/security/quickstart?hl=ja)
 
-## .envで環境変数の設定
+
+# Bootstrapの設定
 
 インストール
-```
-npm install dotenv
-```
-
-ルートディレクトリに`.env`ファイルを用意
-ここにFirebaseへの接続情報を書く
-※変数名は`VUE_APP_`から始まる必要がある
 
 ```
-VUE_APP_apiKey=🤫
-VUE_APP_authDomain=🤫
-VUE_APP_databaseURL=https://プロジェクト名.com
-VUE_APP_projectId=プロジェクト名
-VUE_APP_storageBucket=🤫
-VUE_APP_messagingSenderId=🤫
-VUE_APP_appId=🤫
-VUE_APP_measurementId=🤫
-
+npm install vue bootstrap-vue bootstrap
 ```
 
-上記のキーはfirebaseのプロジェクトページからコピペ可能。
+インポート
 
-`.gitigore`に`.env`を追加する
-
-```
-// .gitignore
-.env
-
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import firebase from 'firebase/app';
+import 'bootstrap/dist/css/bootstrap.css';      // add
+import 'bootstrap-vue/dist/bootstrap-vue.css';  // add
 ```
 
 
-[Vue.js環境変数による開発作業メモ](https://qiita.com/yoshi0518/items/f8cd408f8ef86fb02d74)
 
+
+
+メールテンプレートの編集
+(FirebaseのE-mail認証でアドレスが正しいことを確認する)[https://nipo.sndbox.jp/develop-blog/emailverified]
+
+ログインはできますが、emailValifiedというステータスが`false`になっています。
+初回ログインをして初めてメールアドレスの確認が取れたことになるみたいです。
 
