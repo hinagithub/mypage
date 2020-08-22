@@ -249,7 +249,7 @@ export default {
 
 Register.vueはアカウント登録を行う画面です。
 
-#### data
+#### Data
 ```js
   data() {
     return {
@@ -265,7 +265,7 @@ Register.vueはアカウント登録を行う画面です。
 - password: 画面上で入力されるパスワード
 - error: Firebaseから取得したエラーメッセージ
 
-#### methods
+#### Methods
 
 ```js
  registerUser() {
@@ -294,8 +294,9 @@ Register.vueはアカウント登録を行う画面です。
 ```
 
 認証リンクメールを送信する関数です。
-- `actionCodeSettings`: 認証リンクを押した後の挙動を書くところです。`url`で`/signin`に遷移するよう定義しています。
-- `firebase.auth().languageCode = "ja"`: メールの文面を日本語にしています
+
+`actionCodeSettings`: 認証リンクを押した後の挙動を書くところです。`url`で`/signin`に遷移するよう定義しています。<br />
+`firebase.auth().languageCode = "ja"`: メールの文面を日本語にしています
 
 この処理が実行されると、入力したメールアドレス当てに認証メールが届きます。
 ![image](https://user-images.githubusercontent.com/44778704/90954376-c5ab4600-e4ae-11ea-8b08-58be6d312bbb.png)
@@ -436,7 +437,7 @@ export default {
 ```
 Home.vueはログイン後に遷移する画面です。
 
-#### data
+#### Data
 
 ```js
   data() {
@@ -451,7 +452,7 @@ Home.vueはログイン後に遷移する画面です。
 - emailVerified: メール認証されているかどうかのステータス
 
 
-#### methods
+#### Methods
 
 ```js
 signOut() {
@@ -485,3 +486,10 @@ Firebaseの`signOut()`を呼び出してログアウト状態にする関数で�
 
 参考:
 [Vue.jsとFirebaseで認証メール機能(vuetifyおまけ付き)](https://note.com/tenlife/n/nb225fc1269c7)
+
+# まとめ
+
+firebaseを使えば認証処理が簡単に書けそうだとわかりました。
+メール認証が初回ログイン後みたいなので、その点だけ気をつけようと思います。
+今回記事にした機能意外にもユーザ情報の登録などもできるみたいなので、いろいろ使ってみたいと思います。
+
