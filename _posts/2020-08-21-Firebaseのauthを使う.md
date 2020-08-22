@@ -74,7 +74,8 @@ npm install firebase
 
 
 設定が完了すると、`main.js`が以下のようになっているはずです。
-```js:main.js
+
+```js
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
@@ -98,7 +99,6 @@ createApp(App)
   .use(store)
   .use(router)
   .mount('#app');
-
 ```
 
 ## Bootstrapの設定
