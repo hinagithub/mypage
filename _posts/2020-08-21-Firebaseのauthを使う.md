@@ -9,16 +9,20 @@ aside:
 # はじめに
 
 ##この記事について
-FirebaseのAuthoricationの使い方を知りました。
+FirebaseのAuthenticationの使い方を知りました。
 使い方を忘れてしまった未来の自分のために、設定手順などを記事にまとめておこうと思います。
 
 参考:
-[vue.jsとFirebaseでSlackクローン構築(Firebase理解編)](https://reffect.co.jp/vue/vue-js-firebase-slack-clone)
-[Firebase Realtime Database公式ドキュメント](https://firebase.google.com/docs/database?hl=ja)
+
+- [vue.jsとFirebaseでSlackクローン構築(Firebase理解編)](https://reffect.co.jp/vue/vue-js-firebase-slack-clone)
+- [Firebase Realtime Database公式ドキュメント](https://firebase.google.com/docs/database?hl=ja)
 
 環境:
+
 - @vue/cli 4.5.4
 - Vue.js 3.x
+- Bootstrap 4.5.2
+- Bootstrap-vue 2.16.0
 
 ※Firebaseのアカウントが必要です。
 
@@ -27,25 +31,25 @@ FirebaseのAuthoricationの使い方を知りました。
 アカウント登録の際によく使われるメールリンク機能を実装します。
 こんな感じです。
 
-1. メールアドレスとパスワードで仮登録<br/>
+ 1. メールアドレスとパスワードで仮登録
 ![image](https://user-images.githubusercontent.com/44778704/90954992-8da70180-e4b4-11ea-93b0-49d813b49565.png)
 
-2. 仮登録完了メールのリンクをクリック<br/>
+ 2. 仮登録完了メールのリンクをクリック
 ![image](https://user-images.githubusercontent.com/44778704/90954376-c5ab4600-e4ae-11ea-8b08-58be6d312bbb.png)
 
-3. 完了を確認し続行をクリック<br/>
+ 3. 完了を確認し続行をクリック<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90953993-46684300-e4ab-11ea-9473-3a2974fbfe10.png)
 
-4. サインインする<br/>
-![image](https://user-images.githubusercontent.com/44778704/90954401-ed9aa980-e4ae-11ea-9feb-cadf809644b1.png)
+ 4. サインインする<br/>
+![image](https://user-images.githubusercontent.com/44778704/90969705-888a9680-e536-11ea-81c7-99be7e2352ff.png)
 
-5. Homeに遷移し、「ログイン中」と表示される(メールアドレスが認証される)<br/>
+ 5. Homeに遷移し、「ログイン中」と表示される(メールアドレスが認証される)<br/>
 ![image](https://user-images.githubusercontent.com/44778704/90955547-4ec77a80-e4b9-11ea-9ba6-1de5f471979d.png)
 
 
 # プロジェクトの作成と設定
 
-環境を整えます。
+開発環境を整えます。
 
 ## vueプロジェクトを作成
 
@@ -86,11 +90,11 @@ var firebaseConfig = {
   apiKey: 🤫,
   authDomain: 🤫,
   databaseURL: 🤫,
-  projectId: 'auth-503',
-  storageBucket: 'auth-503.appspot.com',
+  projectId: 'プロジェクト名',
+  storageBucket: 'プロジェクト名.appspot.com',
   messagingSenderId: 🤫,
-  appId: 🤫',
-  measurementId: 🤫',
+  appId: 🤫,
+  measurementId: 🤫,
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -187,7 +191,8 @@ App.vueもルーティングにあわせて修正します。
 
 ## views/Register.vue
 
-```js
+```html
+
 <template>
   <div class="w-25 p-5">
     <p class="h4 pb-3">アカウントの作成</p>
@@ -249,6 +254,16 @@ export default {
 
 Register.vueはアカウント登録を行う画面です。
 
+
+### Template
+
+```html
+<form @submit.prevent="registerUser">
+```
+
+formに`@submit.prevent`をつけることで、`type="submit"`になっているボタンを押してもフォームは送信されず、かわりに`registerUser`関数が呼ばれます。
+
+
 ### Data
 ```js
   data() {
@@ -261,9 +276,10 @@ Register.vueはアカウント登録を行う画面です。
   ```
 
 以下の値を管理します
-- email: 画面上で入力されるメールアドレス
-- password: 画面上で入力されるパスワード
-- error: Firebaseから取得したエラーメッセージ
+
+- `email`: 画面上で入力されるメールアドレス
+- `password`: 画面上で入力されるパスワード
+- `error`: Firebaseから取得したエラーメッセージ
 
 ### Methods
 
@@ -277,7 +293,9 @@ Register.vueはアカウント登録を行う画面です。
     },
 ```
 
-`.createUserWithEmailAndPassword(this.email, this.password)`: emailとpasswordを引数にFirebaseのAuthenticationにユーザを登録しています。登録が成功したら、`sendEmail()`を呼び出します。
+- `.createUserWithEmailAndPassword()`: emailとpasswordを引数にFirebaseのAuthenticationにユーザを登録しています。
+  - 登録が成功した場合は`sendEmail()`を呼び出します。
+  - エラーの場合はエラーメッセージを画面に出力します。
 
 ```js
  sendEmail() {
@@ -295,23 +313,23 @@ Register.vueはアカウント登録を行う画面です。
 
 認証リンクメールを送信する関数です。
 
-`actionCodeSettings`: 認証リンクを押した後の挙動を書くところです。`url`で`/signin`に遷移するよう定義しています。<br />
-`firebase.auth().languageCode = "ja"`: メールの文面を日本語にしています
+- `actionCodeSettings`: 認証リンクを押した後の挙動を書くところです。`url`で`/signin`に遷移するよう定義しています。<br />
+- `firebase.auth().languageCode = "ja"`: メールの文面を日本語にしています。
 
 この処理が実行されると、入力したメールアドレス当てに認証メールが届きます。
 ![image](https://user-images.githubusercontent.com/44778704/90954376-c5ab4600-e4ae-11ea-8b08-58be6d312bbb.png)
 
-件名などはFirebaseのAuhentication > Templateで設定可能です。
+件名などはFirebaseの Auhentication > Templateで設定可能です。
 ![image](https://user-images.githubusercontent.com/44778704/90954333-6ea57100-e4ae-11ea-8424-d3a2710597ce.png)
 
 ただし本文は設定できない仕様みたいです。
-(FirebaseのE-mail認証でアドレスが正しいことを確認する)[https://nipo.sndbox.jp/develop-blog/emailverified]
+[FirebaseのE-mail認証でアドレスが正しいことを確認する](https://nipo.sndbox.jp/develop-blog/emailverified)
 
 
 
 ## views/Signin.vue
 
-```html
+```vue
 <template>
   <div class="w-25 p-5">
     <p class="h4 pb-3">サインイン</p>
@@ -372,9 +390,10 @@ data() {
 
 Register.vueのDataとまったく同じです。
 以下の値を管理します
-- email: 画面上で入力されるメールアドレス
-- password: 画面上で入力されるパスワード
-- error: Firebaseから取得したエラーメッセージ
+
+- `email`: 画面上で入力されるメールアドレス
+- `password`: 画面上で入力されるパスワード
+- `error`: Firebaseから取得したエラーメッセージ
 
 ### Methods
 
@@ -388,13 +407,13 @@ signIn() {
 },
 ```
 
-`signInWithEmailAndPassword`を使ってサインインをしています。
-成功したらHOME画面へ遷移します。
-
+- `signInWithEmailAndPassword()`: メールアドレスとパスワードを使ってサインインをしています。
+  - 成功した場合はHOME画面へ遷移します。
+  - エラーの場合はエラーメッセージを画面に出力します。
 
 ## views/Home.vue
 
-```js
+```vue
 <template>
   <div class="w-25 p-5">
     <p class="h4 pb-3">HOME</p>
@@ -448,8 +467,9 @@ Home.vueはログイン後に遷移する画面です。
   },
 ```
 画面に出力する値を定義しています。
-- authState: ログインしているかどうかのステータス
-- emailVerified: メール認証されているかどうかのステータス
+
+- `authState`: ログインしているかどうかのステータス
+- `emailVerified`: メール認証されているかどうかのステータス
 
 
 ### Methods
@@ -460,7 +480,7 @@ signOut() {
     },
 ```
 
-Firebaseの`signOut()`を呼び出してログアウト状態にする関数です。
+`signOut()`: ログアウト状態にする関数です。
 
 
 ### Mounted
@@ -478,6 +498,7 @@ Firebaseの`signOut()`を呼び出してログアウト状態にする関数で�
 ```
 
 ユーザのログイン状態などを監視しています。
+
 - `.onAuthStateChanged()`: 現在ログインしているユーザの情報を取得することができます。
 - `user.emailVerified`プロパティ: メール認証をしているかどうかがわかります。
 
@@ -492,4 +513,3 @@ Firebaseの`signOut()`を呼び出してログアウト状態にする関数で�
 firebaseを使えば認証処理が簡単に書けそうだとわかりました。
 メール認証が初回ログイン後みたいなので、その点だけ気をつけようと思います。
 今回記事にした機能意外にもユーザ情報の登録などもできるみたいなので、いろいろ使ってみたいと思います。
-
