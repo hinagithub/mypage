@@ -1,6 +1,6 @@
 ---
 layout: article
-title: CircleCi使ってみた
+title: GithubActions使ってみた
 tags: CI/CD
 aside:
   toc: true
