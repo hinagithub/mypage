@@ -59,4 +59,9 @@ export default {
     measurementId =  🤫;
 ```
 
+
+## 参考
+[Nuxt.jsにおけるenvファイルの利用(初学者向けハンズオン)](https://qiita.com/fj_yohei/items/c77bff6f0177b4ff219e)
+
+
 以上
