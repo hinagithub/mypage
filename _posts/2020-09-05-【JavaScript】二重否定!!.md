@@ -1,7 +1,7 @@
 ---
 layout: article
-title: 今更だけどVimの設定
-tags: Vim
+title: 【JavaScript】二重否定!!
+tags: JavaScript
 aside:
   toc: true
 ---
