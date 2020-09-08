@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【JavaScript】二重否定!!
+title: 【JavaScript】二重否定のびっくり2つ!!
 tags: JavaScript
 aside:
   toc: true
