@@ -16,13 +16,14 @@ aside:
   "name": "苗字名前",
   "given_name": "名前",
   "family_name": "苗字",
-  "picture": "Googleのサムネイル画像",
+  "picture": "Googleのアバタ画像URL",
   "email": "メールアドレス@メールアドレス.com",
   "email_verified": 真偽値,
   "locale": "ja"
 }
 
 ```
+
 
 あたりまえかもですが、Firebase Authenticationでは`photoURL`だった名称がこっちでは`picture`で取得するので、移行するなら名前合わせなくちゃいけないです。
 <br/>
