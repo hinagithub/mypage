@@ -1,7 +1,7 @@
 ---
 layout: article
 title: 【Nuxt】GoogleOAuthで取れるuserの中身
-tags: Vue.js Vuetify
+tags: Nuxt NuxtModules OAuth
 aside:
   toc: true
 ---
