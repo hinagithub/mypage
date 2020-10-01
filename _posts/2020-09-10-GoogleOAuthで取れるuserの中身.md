@@ -29,4 +29,19 @@ aside:
 <br/>
 <br/>
 <br/>
+
+## 値の表示
+
+```pug
+v-img(height="150" width="40" :src="$store.state.auth.user.picture")
+p {{ $store.state.auth.user.name }}
+  span(v-if="is_admin" class="subtitle-2") (管理者)
+p {{ me.mail_address }}
+```
+
+こんな感じになる
+
+![image](https://user-images.githubusercontent.com/44778704/94344544-1c321400-005b-11eb-9d5d-366ebe16507d.png)
+
+
 以上
