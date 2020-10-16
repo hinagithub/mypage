@@ -68,7 +68,7 @@ console.log(today)
 // ->2020-10-08
 ```
 
-### <template>で使用(pug)
+### templateで使用(pug)
 
 `this.`は不要
 
