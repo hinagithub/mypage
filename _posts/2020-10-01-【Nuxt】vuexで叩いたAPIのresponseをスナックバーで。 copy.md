@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】vuexで叩いたAPIのresponseをスナックバーで。
+title: 【Nuxt】vuexで叩いたAPIのresponseをスナックバーで。
 tags: Nuxt.js Vuex
 aside:
   toc: true

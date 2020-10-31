@@ -188,3 +188,5 @@ pluginsはnuxt.config.jsへの定義も忘れずに。。
     { src: '~plugins/axios.js', ssr: false },
   ],
 ```
+
+以上

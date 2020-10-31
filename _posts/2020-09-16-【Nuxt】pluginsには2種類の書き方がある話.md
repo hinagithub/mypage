@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】pluginsには2種類の書き方がある話
+title: 【Nuxt】pluginsには2種類の書き方がある話
 tags: Nuxt.js
 aside:
   toc: true

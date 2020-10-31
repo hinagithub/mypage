@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】dayjsの導入
+title: 【Nuxt】dayjsの導入
 tags: Nuxt.js
 aside:
   toc: true

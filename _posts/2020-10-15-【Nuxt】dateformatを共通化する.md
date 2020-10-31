@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】dateformatを共通化する
+title: 【Nuxt】dateformatを共通化する
 tags: Nuxt.js Vuex
 aside:
   toc: true

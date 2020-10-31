@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】ActionやMutationに引数を複数渡したい copy
+title: 【Nuxt】ActionやMutationに引数を複数渡したい copy
 tags: Nuxt.js Vuex
 aside:
   toc: true

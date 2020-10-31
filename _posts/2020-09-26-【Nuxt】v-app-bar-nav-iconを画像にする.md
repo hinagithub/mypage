@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 【 Nuxt】v-app-bar-nav-iconを画像にする
+title: 【Nuxt】v-app-bar-nav-iconを画像にする
 tags: Nuxt.js Vuetify
 aside:
   toc: true
