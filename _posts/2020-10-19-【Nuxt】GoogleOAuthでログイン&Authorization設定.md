@@ -1,7 +1,7 @@
 ---
 layout: article
 title: 【Nuxt】GoogleOAuthでログイン&Authorization設定
-tags: Nuxt.js Vuex
+tags: Nuxt.js Vuex OAuth
 aside:
   toc: true
 ---
