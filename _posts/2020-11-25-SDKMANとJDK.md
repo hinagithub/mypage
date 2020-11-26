@@ -1,6 +1,6 @@
 ---
 layout: article
-title: SDKMANを使ってみる
+title: SDKMANとJDK
 tags: JVM
 aside:
   toc: true
