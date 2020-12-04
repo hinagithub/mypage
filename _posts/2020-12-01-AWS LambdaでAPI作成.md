@@ -111,11 +111,17 @@ REST API(プライベートじゃない方)のインポートボタンをクリ�
 usersリソースが完成
 ![image](https://user-images.githubusercontent.com/44778704/100847234-e37f4280-34c2-11eb-96f9-47295ea43809.png)
 
+子リソースも作成。この時、リソースパスの`id`は`{}`で囲むこと
+![image](https://user-images.githubusercontent.com/44778704/100951085-28ea5100-3551-11eb-90d3-242e041ab220.png)
+
+
+
 ### メソッドの作成
 
 usersを選択した状態でアクション>メソッドの作成を選択しGETメソッドを作る
 
-![image](https://user-images.githubusercontent.com/44778704/100847314-027dd480-34c3-11eb-924b-2b709712a312.png)
+![image](https://user-images.githubusercontent.com/44778704/100951177-60f19400-3551-11eb-9cde-92e1fde4f52f.png)
+
 
 セットアップ画面が表示されるので先ほど作成したLambdaの情報と紐づける。
 
@@ -133,6 +139,72 @@ usersを選択した状態でアクション>メソッドの作成を選択しGE
 ![image](https://user-images.githubusercontent.com/44778704/100848316-4d4c1c00-34c4-11eb-8cfa-a178014b8cef.png)
 
 
+APIのデプロイを選択
+![image](https://user-images.githubusercontent.com/44778704/100951322-b29a1e80-3551-11eb-80db-9c8f1547a7f6.png)
 
-・・・続きは作成中
+- デプロイされるステージ: \[新しいステージ\]
+- ステージ名: `prod`
+
+![image](https://user-images.githubusercontent.com/44778704/100951399-d2314700-3551-11eb-81ec-2eb7a3051d79.png)
+
+
+デプロイボタンを押したら完成！
+URLをコピーし、`/users/1`をつけてブラウザで開いてみる
+![image](https://user-images.githubusercontent.com/44778704/100959893-96eb4400-3562-11eb-8fa1-6b0c4f37ba95.png)
+
+
+
+## エラー①
+
+ランタイムエラー・・・
+![image](https://user-images.githubusercontent.com/44778704/100960005-c7cb7900-3562-11eb-8342-628f695f144c.png)
+
+
+```json
+{
+  "errorType":"TypeError",
+  "errorMessage":"Cannot read property 'id' of undefined",
+  "trace":["TypeError: Cannot read property 'id' of undefined","    at Runtime.exports.handler (/var/task/index.js:11:38)","    at Runtime.handleOnce (/var/runtime/Runtime.js:66:25)"]
+}
+```
+
+コードを見直す
+
+
+
+
+## エラー②
+
+テストした際、DynamoDBのアクセス権限がないみたいなエラー
+```
+*** is not authorized to perform: dynamodb:GetItem on resource: ***
+```
+
+以下の記事をみながらロールを変えたら取得できるようになった！
+
+[AWS lambdaからdynamodbに接続: "AccessDeniedException"で怒られたのでポリシーを設定した](https://qiita.com/hiroga/items/a672344efcf940e66485)
+
+
+
+アクセス権限 > 編集ボタンをクリック
+![image](https://user-images.githubusercontent.com/44778704/100969508-80e77e80-3576-11eb-9046-00d8eebd5199.png)
+
+
+- AWSポリシーテンプレートから新しいロールを作成
+- ポリシーテンプレートオプション
+  - シンプルなマイクロサービスのアクセス権限を選択
+![image](https://user-images.githubusercontent.com/44778704/100969608-aaa0a580-3576-11eb-9358-a8384ed3654c.png)
+
+設定後にもう一度テストを実行したら成功した！
+
+![image](https://user-images.githubusercontent.com/44778704/100969811-0d923c80-3577-11eb-8999-d9276ce9039b.png)
+
+```json
+{
+  "statusCode": 200,
+  "body": "{\"id\":\"1\",\"name\":\"Jill\"}"
+}
+```
+
+以上
 
