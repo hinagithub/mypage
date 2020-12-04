@@ -107,3 +107,27 @@ URLにアクセスするだけ。
 - `/message`をつけるのを忘れずに！
   - つけないとルートにアクセスすることになり、403エラー(`{"message":"Missing Authentication Token"}`)になる
   - [API Gateway {“message”:”Missing Authentication Token”} が返ってきた時](https://bokuranotameno.com/post-10884/)
+
+
+
+# Lambda実行時に引数を渡す
+
+現時点でCloud Watchには `event`の内容は空になっています。(ログの2行目、 INFOのところが空の`{}`になっています。)
+![image](https://user-images.githubusercontent.com/44778704/101118298-1f81e700-362c-11eb-82d7-3ca8a8015447.png)
+
+Lambdaプロキシ統合の使用に✅をつけます。
+![image](https://user-images.githubusercontent.com/44778704/101118720-0168b680-362d-11eb-9020-d3cbd631e17c.png)
+
+
+プロキシの統合設定をした後に実行すると、INFOに `event` の内容が表示されるようになりました
+
+```
+$ curl https://xxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev/message?name=wakuwaku
+```
+
+![image](https://user-images.githubusercontent.com/44778704/101118613-cbc3cd80-362c-11eb-90b7-d4aeb59fec78.png)
+
+
+
+・・・続く。
+
