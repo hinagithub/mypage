@@ -97,6 +97,13 @@ URLにアクセスするだけ。
 ![image](https://user-images.githubusercontent.com/44778704/101115222-548b3b00-3626-11eb-974d-795e27cc87b5.png)
 
 
-`/message`をつけるのを忘れずに！
-つけないとルートにアクセスすることになり、403エラー(`{"message":"Missing Authentication Token"}`)になる
+### 補足
 
+
+- APIのデプロイは忘れがちなので注意
+  - [aws API Gatewayデプロイ時に、「 No integration defined for method」エラーの対策](https://kaoru2012.blogspot.com/2017/08/aws-api-gateway-no-integration-defined.html)
+
+
+- `/message`をつけるのを忘れずに！
+  - つけないとルートにアクセスすることになり、403エラー(`{"message":"Missing Authentication Token"}`)になる
+  - [API Gateway {“message”:”Missing Authentication Token”} が返ってきた時](https://bokuranotameno.com/post-10884/)
