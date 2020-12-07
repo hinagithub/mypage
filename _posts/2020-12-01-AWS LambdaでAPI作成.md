@@ -128,6 +128,9 @@ $ curl https://xxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev/message?nam
 ![image](https://user-images.githubusercontent.com/44778704/101118613-cbc3cd80-362c-11eb-90b7-d4aeb59fec78.png)
 
 
+ブラウザで実行すると、「Hero ◯◯(パラメータ)」と表示されるようになります。
 
-・・・続く。
+APIはこれで公開できましたが、今の状態だと誰でも好き勝手にAPIを実行できてしまいます。
+APIキーを設定して、キーを知っている人だけが実行できるようにするなどの工夫をした方がよい。
+やり方は別の記事で後日書きます。
 
