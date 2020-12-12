@@ -1,7 +1,7 @@
 ---
 layout: article
 title: AWS Lambda+DynamoDB+Gateway
-tags: Scala
+tags: AWS
 aside:
   toc: true
 ---

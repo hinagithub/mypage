@@ -1,4 +1,4 @@
----
+b---
 layout: article
 title: AWS GateWayにAPIキーを設定する
 tags: AWS
@@ -54,8 +54,9 @@ API Gatewayの左側のメニューにある「使用量プラン」をクリッ
 Postmanで実行してみます
 ![image](https://user-images.githubusercontent.com/44778704/101314872-ca98d780-389c-11eb-839b-f0d1dedd46e4.png)
 
-
 レスポンスステータスが200で、Bodyに`Hello XXX`と返ってきているので成功です。
-APIキーを一文字でも変えて実行するとレスポンスステータスは`403`になります。
+ちなみに、APIキーを一文字でも変えて実行するとレスポンスステータスはきちんと`403`(権限がない)のエラーになります。
 
-
+</br>
+</br>
+以上
