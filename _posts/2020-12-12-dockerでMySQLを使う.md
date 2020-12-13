@@ -155,6 +155,50 @@ mysql> select * from employee;
 ```
 できてます！
 
+### docker-composeにする
+
+コマンドではなくdocker-composeを使いたいので設定します。
+
+<br />
+<br />
+その前に今まで作ったコンテナは一旦削除しておく。
+
+
+```
+docker ps -a
+```
+
+実行結果
+```
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS          PORTS                    NAMES
+f1884bfed14f   mysql:5.7            "docker-entrypoint.s…"   28 minutes ago   Up 28 minutes   3306/tcp, 33060/tcp      work_db_1
+```
+
+コンテナIDを指定して削除
+```
+docker rm -f f1
+```
+
+docker-compose.ymlを作成
+```yaml
+version: '3.1'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+```
+
+実行
+```
+docker-compose up -d
+```
+
+あとはコマンドで叩いた時と同じ手順で初期データがちゃんと登録されているかを確認すればOK。
+
+
 ### その他(注意)
 - docker-composeでMySQLの並行稼働を行うとinitializeでこける可能性あり。connection-loopなどの工夫が必要になるかも。
 - dumpデータをリストアしたいときは`exec -i`を使うなどの方法もある
