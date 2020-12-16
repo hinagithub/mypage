@@ -198,11 +198,7 @@ docker-compose up -d
 
 あとはコマンドで叩いた時と同じ手順で初期データがちゃんと登録されているかを確認すればOK。
 
-
 ### その他(注意)
 - docker-composeでMySQLの並行稼働を行うとinitializeでこける可能性あり。connection-loopなどの工夫が必要になるかも。
 - dumpデータをリストアしたいときは`exec -i`を使うなどの方法もある
-
-
-
 
