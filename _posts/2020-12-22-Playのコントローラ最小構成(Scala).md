@@ -66,8 +66,6 @@ class TodoController @Inject()(mcc: MessagesControllerComponents)
   }
 }
 
-
-
 ```
 
 ### 確認
@@ -76,7 +74,42 @@ Postmanで`localhost:9000/todo/register`にアクセス
 
 ![image](https://user-images.githubusercontent.com/44778704/102887128-b3abd500-4499-11eb-8777-a69620135ffb.png)
 
+#### 余談
 
-今回は以上。
+nodeのExpressと比較し、ルーティングが切り出されていることに気がついた。
 
+node.jsの場合
 
+```js
+// GET method route
+app.get('/', function (req, res) {
+  res.send('GET request to the homepage')
+})
+```
+
+↑ `get` なのか `post` なのか、メソッドに書く形。
+
+別々に書くといえばVueもそうだった
+
+```js
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from './views/Home/'
+
+Vue.use(Router)
+
+export default new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    }
+  ]
+})
+```
+
+これまでみた中ではPlayのルーティングが一番わかりやすい！
+
+以上。
