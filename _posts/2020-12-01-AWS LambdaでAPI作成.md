@@ -76,7 +76,9 @@ exports.handler = async (event) => {
 ![image](https://user-images.githubusercontent.com/44778704/101113555-f872e780-3622-11eb-97da-3543eb9d0314.png)
 
 
-- 最後に、アクションからAPIのデプロイをクリックする
+- 最後に、アクションからAPIのデプロイをクリックする。初回の場合は新しいステージ名をつける。
+![image](https://user-images.githubusercontent.com/44778704/103476784-ffe10880-4dfb-11eb-9c87-e5bdde27289a.png)
+
 
 ## 実行
 
