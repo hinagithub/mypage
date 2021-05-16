@@ -1,7 +1,7 @@
 ---
 layout: article
 title: ExpressのTips
-tags: node.js
+tags: Node.js
 aside:
   toc: true
 ---
