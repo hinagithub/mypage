@@ -30,6 +30,11 @@ key: page-about
 <img src="https://user-images.githubusercontent.com/44778704/86893355-772f2b80-c13c-11ea-9a52-438f100f8bcc.png" width="300" alt="hina_img">
 </div>
 
+## 自己紹介
+小さな自社サービス会社で働いているバックエンドエンジニアです。
+趣味と実益を兼ねてITに関わることを勉強しています。
+最近Go言語はじめました。
+
 ## このブログについて
 
 - Qiitaにあげるほどでもないけど大事な小さいTips
@@ -37,7 +42,6 @@ key: page-about
 - 苦労した点
 
 そんなものをここに集めてます。
-
 
 ## 読んだ本
 
