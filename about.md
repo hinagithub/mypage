@@ -26,8 +26,9 @@ titles:
 key: page-about
 ---
 
-
-![hinahinako_smile](https://user-images.githubusercontent.com/44778704/86893355-772f2b80-c13c-11ea-9a52-438f100f8bcc.png)
+<div align="center">
+<img src="https://user-images.githubusercontent.com/44778704/86893355-772f2b80-c13c-11ea-9a52-438f100f8bcc.png" width="300" alt="hina_img">
+</div>
 
 ## このブログについて
 
