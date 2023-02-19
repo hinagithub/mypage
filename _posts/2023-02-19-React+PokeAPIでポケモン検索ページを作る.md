@@ -96,6 +96,7 @@ VueだけじゃなくてReactも触ってみようかな。
 ```
 
 最初はグリッドレイアウトを使っていましたが、ブレークポイントを細かく設定しないと、画面のサイズによってはカードが重なったり、離れすぎたりして...やめました。
+
 MUIのブレークポイントはこんな感じです
 
 ```
@@ -130,21 +131,18 @@ xl, extra-large: 1536px
 
 <img width="436" alt="image" src="https://user-images.githubusercontent.com/44778704/219955975-1af2c4b4-df03-42a1-98b7-bf6802e64361.png">
 
+## 背景色
 
+背景色はApp.tsxのrootに当てると外枠の部分が微妙に色がつかないです。
 
-# 📘 参考
+<img width="913" alt="image" src="https://user-images.githubusercontent.com/44778704/219962491-e56f7a58-ff22-49fe-9082-d822295154bc.png">
 
-参考にさせていただきました
-- [Node.js v18.6.0 documentation](https://nodejs.org/api/crypto.html#class-cipher)
-- [runebook.dev日本語 Crypto](https://runebook.dev/ja/docs/node/crypto)
-- [セッション認証とトークン認証について調べたことをまとめる](https://zenn.dev/pictogram/scraps/f8fc8d80ffc3be)
-- [ASCII文字とURLエンコードの対応表](https://www.seil.jp/doc/index.html#tool/url-encode.html)
-
-
-# 🔑 終わりに
-暗号は奥が深いし認証の種類も複数あるし、どこからどこまで調べたらいいのかわからずネットの海を彷徨いました。
-コードを書いて動かして、「こうしたらどうなる？」という実験をしながら調べたら、意外と理解しやすかったです。
-そんな気がするだけかな。。
+index.htmlのbodyタグに当てたらちゃんと全面に色がつきました。
+```html
+  <body
+    style="min-height: 100vh; background-image: linear-gradient(to top, #ebbba7 0%, #cfc7f8 100%)"
+  >
+```
 
 
 以上
