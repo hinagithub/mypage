@@ -6,8 +6,6 @@ aside:
   toc: true
 ---
 
-
-
 # 🌱 初めに
 
 VueだけじゃなくてReactも触ってみようかな。
