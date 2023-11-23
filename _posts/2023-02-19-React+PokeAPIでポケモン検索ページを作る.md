@@ -1,6 +1,6 @@
 ---
 layout: article
-title: 2023-02-19-React+PokeAPIでポケモン検索ページを作る
+title: React+PokeAPIでポケモン検索ページを作る
 tags: React
 aside:
   toc: true
