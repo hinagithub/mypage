@@ -1,7 +1,7 @@
 ---
 layout: article
-title: 2023-11-19-Raspberry Piのセットアップ
-tags: React
+title: Raspberry Piのセットアップ
+tags: RaspberryPi
 aside:
   toc: true
 ---
